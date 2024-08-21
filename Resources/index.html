@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Credit Utilization Histogram</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="creditUtilizationChart" style="width: 100%; height: 600px;"></div>
+    
+    <script>
+        // Load JSON data from the server (for simplicity here, it's embedded inline)
+        const jsonData = [
+            {"credit_utilization_aug": 0.2, "credit_utilization_july": 0.3, "credit_utilization_june": 0.5, "credit_utilization_may": 0.7, "credit_utilization_april": 0.9},
+            // ... (add more data or fetch via AJAX)
+        ];
+
+        // Parse the data for plotting
+        const utilizationAug = jsonData.map(d => d.credit_utilization_aug);
+        const utilizationJuly = jsonData.map(d => d.credit_utilization_july);
+        const utilizationJune = jsonData.map(d => d.credit_utilization_june);
+        const utilizationMay = jsonData.map(d => d.credit_utilization_may);
+        const utilizationApril = jsonData.map(d => d.credit_utilization_april);
+
+        // Create traces for each month
+        const traceAug = {
+            x: utilizationAug,
+            type: 'histogram',
+            name: 'August'
+        };
+
+        const traceJuly = {
+            x: utilizationJuly,
+            type: 'histogram',
+            name: 'July'
+        };
+
+        const traceJune = {
+            x: utilizationJune,
+            type: 'histogram',
+            name: 'June'
+        };
+
+        const traceMay = {
+            x: utilizationMay,
+            type: 'histogram',
+            name: 'May'
+        };
+
+        const traceApril = {
+            x: utilizationApril,
+            type: 'histogram',
+            name: 'April'
+        };
+
+        // Define the layout of the chart
+        const layout = {
+            title: 'Interactive Credit Utilization Across All Months',
+            xaxis: { title: 'Credit Utilization Ratio' },
+            yaxis: { title: 'Frequency' },
+            barmode: 'overlay'
+        };
+
+        // Plot the data
+        Plotly.newPlot('creditUtilizationChart', [traceAug, traceJuly, traceJune, traceMay, traceApril], layout);
+    </script>
+</body>
+</html>
